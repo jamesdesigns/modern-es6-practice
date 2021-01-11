@@ -1,10 +1,10 @@
   // Get your shorts on - this is an array workout!
-    // ## Array Cardio Day 1
+  
 
     // Some data we can work with
 
 
-    // Additional arrays to work with 
+    // ## Array Cardio Day 2
     const people = [
       { name: 'Wes', year: 1988 },
       { name: 'Kait', year: 1986 },
@@ -22,18 +22,48 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    // const isAdult = people.some(function(person) {
+    //   const currentYear = (new Date()).getFullYear();
+    //   if(currentYear - person.year >= 19) {
+    //     return true;
+    //   }
+    // });
+
+    const isAdult = people.some(person => {
+      const currentYear = (new Date()).getFullYear();
+      return currentYear - person.year >= 19;
+    })
+    console.log({isAdult});
     // Array.prototype.every() // is everyone 19 or older?
+    const allAdults = people.every(person => {
+      const currentYear = (new Date()).getFullYear();
+      return currentYear - person.year >= 19;
+    })
+    console.log({allAdults});
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
-
+    const comment = comments.find(comment => comment.id === 823423); 
+    console.log(comment);
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    const index = comments.findIndex(comment => comment.id === 823423);
+    console.log(index);
+
+    // How do you delete this selected option -->
+    comments.splice(index, 1);
+    console.table(comments);
+
+    const newComments = [
+      ...comments.slice(0, index),
+      ...comments.slice(index + 1)
+    ];
+    console.table(newComments);
 
 
-
+  // ## Array Cardio Day 1
 
     const inventors = [
       { first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
@@ -62,19 +92,19 @@
     // 1. Filter the list of inventors for those who were born in the 1500's
     const fifteen = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600)
 
-    // console.table(fifteen);
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
     const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`)
 
-    // console.log(fullNames);
+    console.log(fullNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
     const order = inventors.sort((a,b) => a.year > b.year ? 1 : -1)
 
-    // console.log(order);
+    console.log(order);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
@@ -82,7 +112,7 @@
       return total + (inventors.passed - inventors.year);
     },0)
 
-    // console.log(yearsLived);
+    console.log(yearsLived);
 
     // 5. Sort the inventors by years lived
     const oldest = inventors.sort((a, b) => {
@@ -91,19 +121,19 @@
       return lastGuy < nextGuy ? -1 : 1;
     })
 
-    // console.table(oldest);
+    console.table(oldest);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-    // const category = document.querySelector('.mw-category');
-    // const links = Array.from(category.querySelectorAll('a'));
+    const category = document.querySelector('.mw-category');
+    const links = Array.from(category.querySelectorAll('a'));
 
-    // const de = links
-    //               .map(link => link.textContent)
-    //               .filter(streetName => streetName.includes('de'));
+    const de = links
+                  .map(link => link.textContent)
+                  .filter(streetName => streetName.includes('de'));
 
-    // console.table(de);
+    console.table(de);
 
 
     // 7. sort Exercise
@@ -114,7 +144,7 @@
       return aLast > bLast ? 1 : -1;
     });
 
-    // console.table(alpha);
+    console.table(alpha);
   
 
     // 8. Reduce Exercise
